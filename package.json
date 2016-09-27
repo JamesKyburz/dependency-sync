@@ -1,0 +1,39 @@
+{
+  "name": "dependency-sync",
+  "description": "sync dependencies automatically",
+  "keywords": [
+    "install",
+    "package.json",
+    "npm",
+    "dependencies"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jameskyburz/dependency-sync.git"
+  },
+  "author": {
+    "name": "James Kyburz",
+    "email": "james.kyburz@gmail.com"
+  },
+  "scripts": {
+    "prepublish": "standard",
+    "preversion": "standard"
+  },
+  "bin": "index.js",
+  "main": "index.js",
+  "version": "1.0.0",
+  "files": [
+    "index.js"
+  ],
+  "dependencies": {
+    "builtins": "^1.0.3",
+    "concat-stream": "^1.5.2",
+    "cross-spawn": "4.0.2",
+    "debug": "2.2.0",
+    "pkg-config": "1.1.1"
+  },
+  "devDependencies": {
+    "standard": "8.1.0"
+  },
+  "license": "MIT"
+}

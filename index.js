@@ -1,12 +1,12 @@
 #!/usr/bin/env node
-var log = require('./log')('index')
-var readPackage = require('./read-package')
-var parse = require('./parse')
-var watch = require('./watch')
-var queue = require('./queue')(update)
-var compare = require('./compare-dependencies')
-var install = require('./install')
-var uninstall = require('./uninstall')
+var log = require('./lib/log')('index')
+var readPackage = require('./lib/read-package')
+var parse = require('./lib/parse')
+var watch = require('./lib/watch')
+var queue = require('./lib/queue')(update)
+var compare = require('./lib/compare-dependencies')
+var install = require('./lib/install')
+var uninstall = require('./lib/uninstall')
 
 var pkgConfig = require('pkg-config')
 var keep = (pkgConfig('dependency-sync', { root: false, cwd: process.cwd() }) || { keep: [] }).keep

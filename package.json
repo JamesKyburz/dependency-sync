@@ -23,16 +23,16 @@
   "main": "index.js",
   "version": "1.0.0",
   "files": [
-    "compare-dependencies.js",
     "index.js",
-    "install.js",
-    "log.js",
-    "package.json",
-    "parse.js",
-    "queue.js",
-    "read-package.js",
-    "uninstall.js",
-    "watch.js"
+    "lib/compare-dependencies.js",
+    "lib/install.js",
+    "lib/log.js",
+    "lib/package.json",
+    "lib/parse.js",
+    "lib/queue.js",
+    "lib/read-package.js",
+    "lib/uninstall.js",
+    "lib/watch.js"
   ],
   "dependencies": {
     "builtins": "^1.0.3",

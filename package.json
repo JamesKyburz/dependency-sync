@@ -23,12 +23,21 @@
   "main": "index.js",
   "version": "1.0.0",
   "files": [
-    "index.js"
+    "index.js",
+    "lib/compare-dependencies.js",
+    "lib/install.js",
+    "lib/log.js",
+    "lib/package.json",
+    "lib/parse.js",
+    "lib/queue.js",
+    "lib/read-package.js",
+    "lib/uninstall.js",
+    "lib/watch.js"
   ],
   "dependencies": {
     "builtins": "^1.0.3",
+    "chokidar": "^1.6.0",
     "concat-stream": "^1.5.2",
-    "cross-spawn": "4.0.2",
     "debug": "2.2.0",
     "pkg-config": "1.1.1"
   },

@@ -12,8 +12,6 @@ var pkgConfig = require('pkg-config')
 var keep = (pkgConfig('dependency-sync', { root: false, cwd: process.cwd() }) || { keep: [] }).keep
 var once = process.argv.slice(2).indexOf('--once') !== -1
 
-if (once) queue.exitOnComplete()
-
 processFile()
 
 var deps
@@ -102,7 +100,7 @@ function update (item, next) {
               log.info('nothing to remove')
             }
           }
-          next()
+          if (!once) next()
         })
       }
     })

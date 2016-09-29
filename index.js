@@ -22,13 +22,16 @@ function processFile (file, event) {
   if (event === 'unlink') delete localDeps[file]
   if (event === 'add') localDeps.push(file)
   if (file) log.info('process %s', file)
-  parse(file, localDeps, (newDeps, newFileDeps, newLocalDeps) => {
+  parse(file, localDeps, (err, newDeps, newFileDeps, newLocalDeps) => {
+    if (first && err) throw err
     if (first) {
       watch(processFile)
       log.info('watching')
       first = false
     }
-    queue.push({ file: file, newDeps, newFileDeps, newLocalDeps })
+    if (!err) {
+      queue.push({ file: file, newDeps, newFileDeps, newLocalDeps })
+    }
   })
 }
 

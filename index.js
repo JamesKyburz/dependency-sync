@@ -7,9 +7,12 @@ var queue = require('./lib/queue')(update)
 var compare = require('./lib/compare-dependencies')
 var install = require('./lib/install')
 var uninstall = require('./lib/uninstall')
-
 var pkgConfig = require('pkg-config')
+
 var keep = (pkgConfig('dependency-sync', { root: false, cwd: process.cwd() }) || { keep: [] }).keep
+var once = process.argv.slice(2).indexOf('--once') !== -1
+
+if (once) queue.exitOnComplete()
 
 processFile()
 
@@ -24,7 +27,7 @@ function processFile (file, event) {
   if (file) log.info('process %s', file)
   parse(file, localDeps, (err, newDeps, newFileDeps, newLocalDeps) => {
     if (first && err) throw err
-    if (first) {
+    if (first && !once) {
       watch(processFile)
       log.info('watching')
       first = false

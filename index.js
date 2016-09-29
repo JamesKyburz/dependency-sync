@@ -53,7 +53,7 @@ function update (item, next) {
       })
 
       Object.keys(dependencies).forEach((dep) => {
-        if (!deps[dep] && !keep[dep]) uninstallModules.push(dep)
+        if (!deps[dep] && keep.indexOf(dep) === -1) uninstallModules.push(dep)
       })
     } else {
       var updateDependencies = compare(fileDeps[file], newFileDeps[file])
@@ -64,7 +64,8 @@ function update (item, next) {
       uninstallModules = updateDependencies
       .uninstall
       .filter((x) => {
-        return !Object.keys(fileDeps)
+        return keep.indexOf(x) === -1 &&
+        !Object.keys(fileDeps)
         .filter((y) => y !== file)
         .filter((y) => fileDeps[y].indexOf(x) !== -1)
         .length

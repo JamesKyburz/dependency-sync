@@ -5,7 +5,13 @@
     "install",
     "package.json",
     "npm",
-    "dependencies"
+    "dependencies",
+    "babel",
+    "browserify",
+    "sync",
+    "missing",
+    "node",
+    "browser"
   ],
   "repository": {
     "type": "git",

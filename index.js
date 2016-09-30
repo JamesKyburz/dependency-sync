@@ -8,6 +8,7 @@ var compare = require('./lib/compare-dependencies')
 var install = require('./lib/install')
 var uninstall = require('./lib/uninstall')
 var pkgConfig = require('pkg-config')
+var path = require('path')
 
 var keep = (pkgConfig('dependency-sync', { root: false, cwd: process.cwd() }) || { keep: [] }).keep
 var once = process.argv.slice(2).indexOf('--once') !== -1
@@ -20,9 +21,12 @@ var localDeps
 var first = true
 
 function processFile (file, event) {
-  if (event === 'unlink') delete localDeps[file]
-  if (event === 'add') localDeps.push(file)
-  if (file) log.info('process %s', file)
+  if (event === 'unlink' || event === 'add') {
+    var filePath = path.resolve(process.cwd(), file)
+    if (event === 'unlink') delete localDeps[filePath]
+    if (event === 'add') localDeps.push(filePath)
+  }
+  if (file) log.info('process %s %s', file, event)
   parse(file, localDeps, (err, newDeps, newFileDeps, newLocalDeps) => {
     if (first && err) throw err
     if (first && !once) {

@@ -19,7 +19,7 @@ Use `--once` if you don't want it to watch and install while you type
 
 `dependency-sync` ignores devDependencies, However dependencies that aren't explicitly required will be removed.
 
-To prevent his add the following directive to your package.json.
+To prevent this add the following directive to your package.json.
 
 ```json
 "dependency-sync": {

@@ -7,10 +7,10 @@ var queue = require('./lib/queue')(update)
 var compare = require('./lib/compare-dependencies')
 var install = require('./lib/install')
 var uninstall = require('./lib/uninstall')
-var pkgConfig = require('pkg-config')
 var path = require('path')
+var config = require('./lib/config')
 
-var keep = (pkgConfig('dependency-sync', { root: false, cwd: process.cwd() }) || { keep: [] }).keep
+var keep = config.keep
 var once = process.argv.slice(2).indexOf('--once') !== -1
 
 processFile()

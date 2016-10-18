@@ -2,6 +2,7 @@
   "name": "dependency-sync",
   "description": "sync dependencies automatically",
   "keywords": [
+    "yarn",
     "install",
     "package.json",
     "npm",

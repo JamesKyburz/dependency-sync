@@ -1,5 +1,6 @@
 # dependency-sync
 
+
 :zap: *sync your dependencies* :zap:
 
 [![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
@@ -25,6 +26,20 @@ To prevent his add the following directive to your package.json.
   "keep": [
     "babelify"
   ]
+}
+```
+
+# yarn
+
+To use `dependency-sync` with yarn use add the following directive to your package.json.
+
+args is passed to [yarn add](https://yarnpkg.com/en/docs/cli/add)
+
+```json
+"dependency-sync": {
+  "yarn": {
+    "args": [ ]
+  }
 }
 ```
 

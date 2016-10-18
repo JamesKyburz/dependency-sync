@@ -32,12 +32,13 @@
   "files": [
     "index.js",
     "lib/compare-dependencies.js",
+    "lib/config.js",
     "lib/install.js",
     "lib/log.js",
-    "lib/package.json",
     "lib/parse.js",
     "lib/queue.js",
     "lib/read-package.js",
+    "lib/spawn.js",
     "lib/uninstall.js",
     "lib/watch.js"
   ],

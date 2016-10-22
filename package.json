@@ -43,7 +43,7 @@
     "lib/watch.js"
   ],
   "dependencies": {
-    "browserify": "13.1.0",
+    "browserify": "13.1.1",
     "builtins": "1.0.3",
     "chokidar": "1.6.1",
     "concat-stream": "1.5.2",

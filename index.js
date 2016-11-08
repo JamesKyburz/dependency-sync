@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+var config = require('./lib/config')
 var log = require('./lib/log')('index')
 var readPackage = require('./lib/read-package')
 var parse = require('./lib/parse')
@@ -8,10 +9,8 @@ var compare = require('./lib/compare-dependencies')
 var install = require('./lib/install')
 var uninstall = require('./lib/uninstall')
 var path = require('path')
-var config = require('./lib/config')
-
+var once = config.args.indexOf('--once') !== -1
 var keep = config.keep
-var once = process.argv.slice(2).indexOf('--once') !== -1
 
 processFile()
 

@@ -43,6 +43,7 @@
     "lib/watch.js"
   ],
   "dependencies": {
+    "bin-path": "0.0.3",
     "browserify": "13.1.1",
     "builtins": "1.0.3",
     "chokidar": "1.6.1",

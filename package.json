@@ -49,7 +49,7 @@
     "chokidar": "1.6.1",
     "concat-stream": "1.5.2",
     "cross-spawn": "5.0.1",
-    "debug": "2.3.2",
+    "debug": "2.3.3",
     "pkg-config": "1.1.1"
   },
   "devDependencies": {

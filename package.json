@@ -28,7 +28,7 @@
   },
   "bin": "index.js",
   "main": "index.js",
-  "version": "2.0.15",
+  "version": "2.0.16",
   "files": [
     "index.js",
     "lib/compare-dependencies.js",

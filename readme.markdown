@@ -1,5 +1,7 @@
 # dependency-sync
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/JamesKyburz/dependency-sync.svg)](https://greenkeeper.io/)
+
 
 :zap: *sync your dependencies* :zap:
 

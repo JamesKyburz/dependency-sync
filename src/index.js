@@ -52,38 +52,42 @@ function update (item, next) {
       fileDeps = newFileDeps
       localDeps = newLocalDeps
 
-      Object.keys(deps).forEach((dep) => {
+      Object.keys(deps).forEach(dep => {
         if (!dependencies[dep]) installModules.push(dep)
       })
 
-      Object.keys(dependencies).forEach((dep) => {
+      Object.keys(dependencies).forEach(dep => {
         if (!deps[dep] && keep.indexOf(dep) === -1) uninstallModules.push(dep)
       })
     } else {
       var updateDependencies = compare(fileDeps[file], newFileDeps[file])
-      installModules = updateDependencies
-      .install
-      .filter((x) => !dependencies[x])
+      installModules = updateDependencies.install.filter(x => !dependencies[x])
 
-      uninstallModules = updateDependencies
-      .uninstall
-      .filter((x) => {
-        return keep.indexOf(x) === -1 &&
-        !Object.keys(fileDeps)
-        .filter((y) => y !== file)
-        .filter((y) => fileDeps[y].indexOf(x) !== -1)
-        .length
+      uninstallModules = updateDependencies.uninstall.filter(x => {
+        return (
+          keep.indexOf(x) === -1 &&
+          !Object.keys(fileDeps)
+            .filter(y => y !== file)
+            .filter(y => fileDeps[y].indexOf(x) !== -1).length
+        )
       })
 
-      Object.keys(newFileDeps)
-      .forEach((x) => {
+      Object.keys(newFileDeps).forEach(x => {
         fileDeps[x] = newFileDeps[x]
       })
     }
 
+    if (config.lambda) {
+      installModules = installModules.filter(x => x !== 'aws-sdk')
+    }
+
+    if (dependencies['aws-sdk'] && !uninstallModules.find(x => 'aws-sdk')) {
+      uninstallModules.push('aws-sdk')
+    }
+
     log.info({ installModules, uninstallModules })
 
-    install(installModules, (err) => {
+    install(installModules, err => {
       if (err) {
         log.error('failed to npm install', err, installModules)
         next()
@@ -93,9 +97,12 @@ function update (item, next) {
         } else {
           log.info('nothing to install')
         }
-        uninstall(uninstallModules, (err) => {
+        uninstall(uninstallModules, err => {
           if (err) {
-            log.error('failed to remove modules from package.json', uninstallModules)
+            log.error(
+              'failed to remove modules from package.json',
+              uninstallModules
+            )
           } else {
             if (uninstallModules.length) {
               log.info('removed modules form package.json', uninstallModules)

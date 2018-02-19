@@ -23,7 +23,7 @@ function uninstall (modules, cb) {
     })
     fs.writeFile(packageJson, JSON.stringify(json, null, 2), (err) => {
       if (err) {
-        cb(`failed to remove dependencies ${err}`)
+        cb(new Error(`failed to remove dependencies ${err}`))
       } else {
         cb()
       }

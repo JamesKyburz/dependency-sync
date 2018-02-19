@@ -6,7 +6,8 @@ var config = Object.assign(
     args: [],
     keep: [],
     ignore: [],
-    yarn: false
+    yarn: false,
+    lambda: false
   },
   pkgConfig('dependency-sync', { root: false, cwd: process.cwd() })
 )
@@ -22,6 +23,10 @@ if (config.args.indexOf('--debug') !== -1) {
 
 if (config.args.indexOf('--yarn') !== -1 && !config.yarn) {
   config.yarn = { args: [] }
+}
+
+if (config.args.indexOf('--lambda') !== -1) {
+  config.lambda = true
 }
 
 if (!config.args.filter((x) => !x.match(/^--/)).length) {

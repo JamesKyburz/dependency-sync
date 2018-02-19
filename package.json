@@ -23,24 +23,14 @@
     "email": "james.kyburz@gmail.com"
   },
   "scripts": {
-    "prepublish": "standard",
-    "preversion": "standard"
+    "prepublishOnly": "npx standard",
+    "preversion": "npx standard"
   },
-  "bin": "index.js",
-  "main": "index.js",
+  "bin": "src/index.js",
+  "main": "src/index.js",
   "version": "2.1.0",
   "files": [
-    "index.js",
-    "lib/compare-dependencies.js",
-    "lib/config.js",
-    "lib/install.js",
-    "lib/log.js",
-    "lib/parse.js",
-    "lib/queue.js",
-    "lib/read-package.js",
-    "lib/spawn.js",
-    "lib/uninstall.js",
-    "lib/watch.js"
+    "src"
   ],
   "dependencies": {
     "bin-path": "0.0.3",
@@ -52,8 +42,6 @@
     "debug": "2.6.6",
     "pkg-config": "1.1.1"
   },
-  "devDependencies": {
-    "standard": "10.0.2"
-  },
+  "devDependencies": {},
   "license": "MIT"
 }

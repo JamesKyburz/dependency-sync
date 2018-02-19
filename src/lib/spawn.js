@@ -7,7 +7,7 @@ function spawn (program, args, cb) {
   var proc = child.spawn(program, args, options)
   proc.on('exit', (exitCode) => {
     if (exitCode) {
-      cb(`${program} failed`)
+      cb(new Error(`${program} failed`))
     } else {
       cb()
     }

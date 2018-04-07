@@ -5,6 +5,8 @@
 [![js-standard-style](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://github.com/feross/standard)
 [![Greenkeeper badge](https://badges.greenkeeper.io/JamesKyburz/dependency-sync.svg)](https://greenkeeper.io/)
 
+<a href="https://asciinema.org/a/174868?autoplay=1&speed=4&size=small&preload=1"><img src="https://asciinema.org/a/174868.png" width="380"/></a>
+
 # usage
 
 ```

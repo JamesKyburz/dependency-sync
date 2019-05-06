@@ -77,14 +77,6 @@ function update (item, next) {
       })
     }
 
-    if (config.lambda) {
-      installModules = installModules.filter(x => x !== 'aws-sdk')
-    }
-
-    if (dependencies['aws-sdk'] && !uninstallModules.find(x => 'aws-sdk')) {
-      uninstallModules.push('aws-sdk')
-    }
-
     log.info({ installModules, uninstallModules })
 
     install(installModules, err => {

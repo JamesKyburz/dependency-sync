@@ -1,36 +1,34 @@
-var pkgConfig = require('pkg-config')
-var path = require('path')
+const pkgConfig = require('pkg-config')
+const path = require('path')
 
-var config = Object.assign(
-  {
-    args: [],
-    keep: [],
-    ignore: [],
-    yarn: false
-  },
-  pkgConfig('dependency-sync', { root: false, cwd: process.cwd() })
-)
+const config = {
+  args: [],
+  keep: [],
+  ignore: [],
+  yarn: false,
+  ...pkgConfig('dependency-sync', { root: false, cwd: process.cwd() })
+}
 
 config.ignore = config.ignore.map(x => path.relative(process.cwd(), x))
 
 config.keep.push('dependency-sync')
 config.args.push.apply(config.args, process.argv.slice(2))
 
-if (config.args.indexOf('--debug') !== -1) {
+if (!config.args.includes('--quiet')) {
   process.env.DEBUG = (process.env.DEBUG || '') + ' dependency-sync*'
 }
 
-if (config.args.indexOf('--yarn') !== -1 && !config.yarn) {
+if (config.args.includes('--yarn') && !config.yarn) {
   config.yarn = { args: [] }
-}
-
-if (!config.args.filter(x => !x.match(/^--/)).length) {
-  config.args.unshift('.')
 }
 
 config.args = [
   ...config.args.filter(x => !/^--/.test(x)),
   ...config.args.filter(x => /^--/.test(x))
 ]
+
+if (!config.args.filter(x => !x.match(/^--/)).length) {
+  config.args.unshift('.')
+}
 
 module.exports = config

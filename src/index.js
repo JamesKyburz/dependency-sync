@@ -1,16 +1,16 @@
 #!/usr/bin/env node
-var config = require('./lib/config')
-var log = require('./lib/log')('index')
-var readPackage = require('./lib/read-package')
-var parse = require('./lib/parse')
-var watch = require('./lib/watch')
-var queue = require('./lib/queue')(update)
-var compare = require('./lib/compare-dependencies')
-var install = require('./lib/install')
-var uninstall = require('./lib/uninstall')
-var path = require('path')
-var once = config.args.indexOf('--once') !== -1
-var keep = config.keep
+const config = require('./lib/config')
+const log = require('./lib/log')('index')
+const readPackage = require('./lib/read-package')
+const parse = require('./lib/parse')
+const watch = require('./lib/watch')
+const queue = require('./lib/queue')(update)
+const compare = require('./lib/compare-dependencies')
+const install = require('./lib/install')
+const uninstall = require('./lib/uninstall')
+const path = require('path')
+const watchChanges = config.args.includes('--watch')
+const keep = config.keep
 
 processFile()
 
@@ -28,7 +28,7 @@ function processFile (file, event) {
   if (file) log.info('process %s %s', file, event)
   parse(file, localDeps, (err, newDeps, newFileDeps, newLocalDeps) => {
     if (first && err) throw err
-    if (first && !once) {
+    if (first && watchChanges) {
       watch(processFile)
       log.info('watching')
       first = false
@@ -102,7 +102,7 @@ function update (item, next) {
               log.info('nothing to remove')
             }
           }
-          if (!once) next()
+          if (watchChanges) next()
         })
       }
     })

@@ -28,4 +28,9 @@ if (!config.args.filter(x => !x.match(/^--/)).length) {
   config.args.unshift('.')
 }
 
+config.args = [
+  ...config.args.filter(x => !/^--/.test(x)),
+  ...config.args.filter(x => /^--/.test(x))
+]
+
 module.exports = config

@@ -1,12 +1,12 @@
-var config = require('./config')
-var spawn = require('cross-spawn')
-var concat = require('concat-stream')
-var builtins = require('builtins')
-var path = require('path')
-var log = require('./log')('parse')
-var bin = require('bin-path')(require)
-var argv = config.args
-var browserifyBin = bin('browserify').browserify
+const config = require('./config')
+const spawn = require('cross-spawn')
+const concat = require('concat-stream')
+const builtins = require('builtins')()
+const path = require('path')
+const log = require('./log')('parse')
+const bin = require('bin-path')(require)
+const argv = config.args
+const { browserify: browserifyBin } = bin('browserify')
 
 module.exports = parse
 

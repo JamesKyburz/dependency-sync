@@ -7,15 +7,31 @@
 
 <a href="https://asciinema.org/a/174868?autoplay=1&speed=4&size=small&preload=1"><img src="https://asciinema.org/a/174868.png" width="380"/></a>
 
-# usage
+# usage for entry point in module
 
 ```
-DEBUG=dependency-sync* dependency-sync ./assets/js ./server -t babelify
+npx dependency-sync
 ```
 
-Babelify is only needed if you use jsx, or features node doesn't yet understand.
+# multiple entry points
 
-Use `--once` if you don't want it to watch and install while you type
+```
+npx dependency-sync ./file-1.js ./file-2.js
+```
+
+# esm modules
+
+```
+npx dependency-sync -t babelify
+```
+
+babel and babelify will need to be installed and configured for esm.
+
+# watch files and sync dependencies
+
+```
+npx dependency-sync --watch
+```
 
 # keep
 

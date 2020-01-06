@@ -1,32 +1,19 @@
-var packageJson = process.cwd() + '/package.json'
-var readPackage = require('./read-package')
+var log = require('./log')('uninstall')
 var spawn = require('./spawn')
 var config = require('./config')
-var fs = require('fs')
+module.exports = uninstall
 
 var yarn = config.yarn
 
-module.exports = uninstall
-
 function uninstall (modules, cb) {
-  modules = modules.slice()
-  if (!modules.length) return cb()
+  var args = modules.slice()
+  if (!args.length) return cb()
+  log.info('uninstalling', modules)
+  args.unshift(yarn ? 'remove' : 'uninstall')
   if (yarn) {
-    var args = modules
-    args.unshift('remove')
-    return spawn('yarn', args, cb)
+    if (yarn.args) args.push.apply(args, yarn.args)
+  } else {
+    args.push('-S')
   }
-  readPackage((err, json) => {
-    if (err) return cb(err)
-    modules.forEach((module) => {
-      delete json.dependencies[module]
-    })
-    fs.writeFile(packageJson, JSON.stringify(json, null, 2), (err) => {
-      if (err) {
-        cb(new Error(`failed to remove dependencies ${err}`))
-      } else {
-        cb()
-      }
-    })
-  })
+  return spawn(yarn ? 'yarn' : 'npm', args, cb)
 }

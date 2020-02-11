@@ -39,7 +39,7 @@ config.args = [
   ...config.args.filter(x => /^--/.test(x))
 ]
 
-if (!config.args.filter(x => !x.match(/^--/)).length) {
+if (!config.args.find(x => x.startsWith('.'))) {
   config.args.unshift('.')
 }
 

@@ -15,11 +15,23 @@ config.keep.push('dependency-sync')
 config.args.push.apply(config.args, process.argv.slice(2))
 
 if (!config.args.includes('--quiet')) {
-  process.env.DEBUG = (process.env.DEBUG || '') + ' dependency-sync*'
+  process.env.DEBUG =
+    (process.env.DEBUG || '') +
+    ' dependency-sync*info*' +
+    ' dependency-sync*error*' +
+    (config.args.includes('--verbose') ? ' dependency-sync*debug*' : '')
 }
 
 if (config.args.includes('--yarn') && !config.yarn) {
   config.yarn = { args: [] }
+}
+
+if (config.args.includes('--dry-run')) {
+  config.dryRun = true
+}
+
+if (config.args.includes('--check-only')) {
+  config.checkOnly = true
 }
 
 config.args = [

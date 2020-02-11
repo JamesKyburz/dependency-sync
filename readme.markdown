@@ -19,18 +19,51 @@ npx dependency-sync
 npx dependency-sync ./file-1.js ./file-2.js
 ```
 
-# esm modules
+# esm modules & jsx
 
 ```
 npx dependency-sync -t babelify
 ```
 
-babel and babelify will need to be installed and configured for esm.
+babel and babelify will need to be installed and configured
 
-# watch files and sync dependencies
+example `package.json`
+
+```json
+  "devDependencies": {
+    "@babel/core": "7.8.4",
+    "@babel/preset-env": "7.8.4",
+    "@babel/preset-react": "7.8.3",
+    "babelify": "10.0.0"
+  },
+  "dependency-sync": {
+    "args": [
+      "-t",
+      "babelify"
+    ]
+  }
+```
+
+example `babel.config.js`
+
+```js
+  module.exports = {
+    presets: ['@babel/preset-env', '@babel/preset-react']
+  }
+```
+
+# watch dependency changes
 
 ```
 npx dependency-sync --watch
+```
+
+# check-only
+
+will exit with error if modules are not in sync
+
+```
+npx dependency-sync --check-only
 ```
 
 # keep
@@ -55,10 +88,29 @@ args is passed to [yarn add](https://yarnpkg.com/en/docs/cli/add)
 
 ```json
 "dependency-sync": {
-  "yarn": {
+  "yarn": true
+}
+
+or with extra arguments
+
+```json
+"dependency-sync": {
+  "yarn": 
     "args": [ ]
   }
 }
+```
+
+# dry-run
+
+```
+npx dependency-sync --dry-run
+```
+
+# verbose
+
+```
+npx dependency-sync --verbose
 ```
 
 # license

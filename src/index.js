@@ -12,6 +12,8 @@ const path = require('path')
 const watchChanges = config.args.includes('--watch')
 const keep = config.keep
 
+log.debug(config)
+
 processFile()
 
 var deps
@@ -78,6 +80,17 @@ function update (item, next) {
     }
 
     log.info({ installModules, uninstallModules })
+
+    if (installModules.length || uninstallModules.length) {
+      if (config.dryRun) {
+        log.info('dry run, will not update')
+        return
+      }
+      if (config.checkOnly) {
+        log.error('failed check, modules not in sync')
+        process.exit(1)
+      }
+    }
 
     install(installModules, err => {
       if (err) {

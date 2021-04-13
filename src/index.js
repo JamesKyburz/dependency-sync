@@ -14,16 +14,16 @@ const keep = config.keep
 
 log.debug(config)
 
-processFile()
+let deps
+let fileDeps
+let localDeps
+let first = true
 
-var deps
-var fileDeps
-var localDeps
-var first = true
+processFile()
 
 function processFile (file, event) {
   if (event === 'unlink' || event === 'add') {
-    var filePath = path.resolve(process.cwd(), file)
+    const filePath = path.resolve(process.cwd(), file)
     if (event === 'unlink') delete localDeps[filePath]
     if (event === 'add') localDeps.push(filePath)
   }
@@ -42,12 +42,12 @@ function processFile (file, event) {
 }
 
 function update (item, next) {
-  var { file, newDeps, newFileDeps, newLocalDeps } = item
+  const { file, newDeps, newFileDeps, newLocalDeps } = item
   readPackage((err, json) => {
     if (err) throw err
-    var dependencies = json.dependencies || {}
-    var installModules = []
-    var uninstallModules = []
+    const dependencies = json.dependencies || {}
+    let installModules = []
+    let uninstallModules = []
 
     if (!deps) {
       deps = newDeps
@@ -62,7 +62,7 @@ function update (item, next) {
         if (!deps[dep] && keep.indexOf(dep) === -1) uninstallModules.push(dep)
       })
     } else {
-      var updateDependencies = compare(fileDeps[file], newFileDeps[file])
+      const updateDependencies = compare(fileDeps[file], newFileDeps[file])
       installModules = updateDependencies.install.filter(x => !dependencies[x])
 
       uninstallModules = updateDependencies.uninstall.filter(x => {

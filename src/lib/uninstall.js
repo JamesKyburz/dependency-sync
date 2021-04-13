@@ -1,12 +1,12 @@
-var log = require('./log')('uninstall')
-var spawn = require('./spawn')
-var config = require('./config')
+const log = require('./log')('uninstall')
+const spawn = require('./spawn')
+const config = require('./config')
 module.exports = uninstall
 
-var yarn = config.yarn
+const yarn = config.yarn
 
 function uninstall (modules, cb) {
-  var args = modules.slice()
+  const args = modules.slice()
   if (!args.length) return cb()
   log.info('uninstalling', modules)
   args.unshift(yarn ? 'remove' : 'uninstall')

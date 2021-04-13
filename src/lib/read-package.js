@@ -1,5 +1,5 @@
-var packageJson = process.cwd() + '/package.json'
-var fs = require('fs')
+const packageJson = process.cwd() + '/package.json'
+const fs = require('fs')
 
 module.exports = get
 

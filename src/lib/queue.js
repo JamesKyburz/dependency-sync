@@ -1,5 +1,5 @@
-var queue = []
-var listener
+const queue = []
+let listener
 
 module.exports = create
 
@@ -14,7 +14,7 @@ function push (item) {
 }
 
 function processQueue () {
-  var item = queue.shift()
+  const item = queue.shift()
   if (item) {
     listener(item, processQueue)
   } else {

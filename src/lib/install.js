@@ -1,12 +1,12 @@
-var log = require('./log')('install')
-var spawn = require('./spawn')
-var config = require('./config')
+const log = require('./log')('install')
+const spawn = require('./spawn')
+const config = require('./config')
 module.exports = install
 
-var yarn = config.yarn
+const yarn = config.yarn
 
 function install (modules, cb) {
-  var args = modules.slice()
+  const args = modules.slice()
   if (!args.length) return cb()
   log.info('installing', modules)
   args.unshift(yarn ? 'add' : 'install')

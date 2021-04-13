@@ -1,8 +1,8 @@
 module.exports = compare
 
 function compare (before, after) {
-  var install = []
-  var uninstall = []
+  const install = []
+  const uninstall = []
   before = before || []
   after = after || []
   before.forEach((x) => {

@@ -11,12 +11,12 @@ const { browserify: browserifyBin } = bin('browserify')
 module.exports = parse
 
 function parse (file, localDeps, cb) {
-  var args = file ? [file] : argv
-  var filePath = file ? path.resolve(process.cwd(), file) : null
+  let args = file ? [file] : argv
+  const filePath = file ? path.resolve(process.cwd(), file) : null
   localDeps = localDeps || []
-  var firstArgIndex = argv.findIndex(x => x[0] === '-')
+  const firstArgIndex = argv.findIndex(x => x[0] === '-')
   if (firstArgIndex !== -1) args.push.apply(args, argv.slice(firstArgIndex))
-  var exclude = []
+  const exclude = []
 
   localDeps.filter(x => filePath !== x).forEach(x => exclude.push('-x', x))
 
@@ -28,20 +28,21 @@ function parse (file, localDeps, cb) {
     '--no-bundle-external'
   ])
 
-  var browserify = spawn(browserifyBin, args)
+  const browserify = spawn(browserifyBin, args)
   browserify.stderr.pipe(process.stderr)
   browserify.stdout.pipe(
     concat(data => {
+      let json
       try {
-        var json = JSON.parse(data)
+        json = JSON.parse(data)
       } catch (e) {
         return cb(new Error(`Error in browserify ${e}`))
       }
-      var deps = {}
-      var fileDeps = {}
-      var localDeps = []
+      const deps = {}
+      const fileDeps = {}
+      const localDeps = []
       json.forEach(item => {
-        var filePath = path.relative(process.cwd(), require.resolve(item.file))
+        const filePath = path.relative(process.cwd(), require.resolve(item.file))
         if (config.ignore.find(x => x === filePath)) return
         fileDeps[filePath] = []
         Object.keys(item.deps)

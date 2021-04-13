@@ -1,9 +1,9 @@
-var debug = require('debug')
+const debug = require('debug')
 
 module.exports = createLog
 
 function createLog (context) {
-  var prefix = 'dependency-sync'
+  const prefix = 'dependency-sync'
   return {
     info: debug(`${prefix}/${context}:info`),
     debug: debug(`${prefix}/${context}:debug`),

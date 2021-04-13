@@ -1,9 +1,9 @@
-var chokidar = require('chokidar')
+const chokidar = require('chokidar')
 
 module.exports = watch
 
 function watch (cb) {
-  var w = chokidar.watch('.', { cwd: process.cwd(), ignored: /node_modules|\.git/, ignoreInitial: true })
+  const w = chokidar.watch('.', { cwd: process.cwd(), ignored: /node_modules|\.git/, ignoreInitial: true })
   w.setMaxListeners(0)
   ;['change', 'add', 'unlink'].forEach((event) => {
     w.on(event, (file) => {

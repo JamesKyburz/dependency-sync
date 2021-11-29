@@ -40,7 +40,7 @@
     "chokidar": "3.5.1",
     "concat-stream": "2.0.0",
     "cross-spawn": "7.0.3",
-    "debug": "4.3.2",
+    "debug": "4.3.3",
     "pkg-config": "1.1.1"
   },
   "dependency-sync": {
